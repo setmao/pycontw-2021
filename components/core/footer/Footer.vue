@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-col px-4 py-8 bg-gray-900 text-golden">
         <div class="flex justify-center">
-            <div class="flex flex-col mr-20">
+            <div class="flex flex-col">
                 <locale-link to="/about/code-of-conduct">
                     {{ $t('codeOfConduct') }}
                 </locale-link>
@@ -15,18 +15,22 @@
                 </locale-link>
                 -->
             </div>
-            <div class="flex flex-col ml-20">
-                <ext-link href="https://pycontw.blogspot.tw/">
+        </div>
+        <div class="flex justify-center mt-10">
+            <div class="">
+                <ext-link class="m-8" href="https://pycontw.blogspot.tw/">
                     Blogspot
                 </ext-link>
-                <ext-link href="https://www.facebook.com/pycontw">
+                <ext-link class="m-8" href="https://www.facebook.com/pycontw">
                     Facebook
                 </ext-link>
-                <ext-link href="https://twitter.com/pycontw">Twitter</ext-link>
+                <ext-link class="m-8" href="https://twitter.com/pycontw">
+                    Twitter
+                </ext-link>
                 <a
                     href="mailto:organizers@pycon.tw"
                     target="_blank"
-                    class="outline-none"
+                    class="outline-none m-8"
                 >
                     Email
                 </a>
