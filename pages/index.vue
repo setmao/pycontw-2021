@@ -81,6 +81,15 @@ export default {
     text-align: center;
 }
 
+.btn {
+    @apply box-border border-4 border-gray-900 text-center px-12 py-2 rounded-full font-extrabold items-center justify-center;
+}
+
+.btn--primary {
+    color: #c2a53a;
+    border-color: #c2a53a;
+}
+
 .text-golden {
     color: #c2a53a;
 }
