@@ -3,5 +3,5 @@
     "/api/sponsors/jobs/": "/jobs",
     "/api/events/keynotes/": "/keynotes",
     "/api/events/talks/": "/talks",
-    "/api/events/talk/:pk/": "talk/:pk"
+    "/api/events/talk/:pk/": "/talk/:pk"
 }

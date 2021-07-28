@@ -374,7 +374,8 @@
             "begin_time": "2021-10-02T06:05:00Z",
             "end_time": "2021-10-02T06:35:00Z",
             "is_remote": false,
-            "location": "6-r2"
+            "location": "6-r2",
+            "is_sponsored": false
         },
         {
             "id": 2,
@@ -385,8 +386,9 @@
             "recording_policy": true,
             "abstract": "Share my knowledge",
             "detailed_description": "**Introduction of ourselves**\r\nIn this talk, we will briefly introduce the place where we come from.",
-            "slide_link": "",
-            "slido_embed_link": "",
+            "slide_link": "https://www.facebook.com/",
+            "slido_embed_link": "https://app.sli.do/event/vppisnh8",
+            "youtube_id": "dQw4w9WgXcQ",
             "speakers": [
                 {
                     "facebook_profile_url": "https://www.facebook.com/",
@@ -408,7 +410,8 @@
             "begin_time": "2021-10-02T06:05:00Z",
             "end_time": "2021-10-02T06:35:00Z",
             "is_remote": true,
-            "location": "6-r2"
+            "location": "6-r2",
+            "is_sponsored": true
         },
         {
             "id": 3,
@@ -434,7 +437,8 @@
             "begin_time": "2021-10-02T06:05:00Z",
             "end_time": "2021-10-02T06:35:00Z",
             "is_remote": false,
-            "location": "5-r1"
+            "location": "5-r1",
+            "is_sponsored": false
         },
         {
             "id": 4,
@@ -460,7 +464,8 @@
             "begin_time": "2021-10-02T05:45:00Z",
             "end_time": "2021-10-02T06:00:00Z",
             "is_remote": false,
-            "location": "4-r0"
+            "location": "4-r0",
+            "is_sponsored": false
         }
     ]
 }
