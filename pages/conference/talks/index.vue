@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import i18n from '@/i18n/conference/talks.i18n'
+import i18n from '@/i18n/conference/speeches.i18n'
 import I18nPageWrapper from '@/components/core/i18n/PageWrapper'
 import CoreH1 from '@/components/core/titles/H1'
 import SpeechCard from '@/components/events/SpeechCard'
