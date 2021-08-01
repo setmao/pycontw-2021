@@ -4,18 +4,16 @@ export const state = () => ({
     sponsorsData: [],
     jobsData: [],
     keynotesData: [],
-    talksData: [],
-    talkData: {},
-    // tutorialsData: [],
+    speechesData: [],
+    speechData: {},
 })
 
 export const mutations = {
     setSponsorsData: set('sponsorsData'),
     setJobsData: set('jobsData'),
     setKeynotesData: set('keynotesData'),
-    setTalksData: set('talksData'),
-    setTalkDetailData: set('talkData'),
-    // setTutorialsData: set('tutorialsData'),
+    setSpeechesData: set('speechesData'),
+    setSpeechDetailData: set('speechData'),
 }
 
 export const actions = {
@@ -31,20 +29,19 @@ export const actions = {
         const keynoteList = await this.$http.$get('/api/events/keynotes/')
         commit('setKeynotesData', keynoteList)
     },
-    async $getTalksData({ commit }) {
-        const talkList = await this.$http.$get('/api/events/talks/')
-        commit('setTalksData', talkList)
-    },
-    async $getTalkDetailData({ commit }, id = 0, isSponsored = false) {
-        let endpoint = `/api/events/talk/${id}/`
-        if (isSponsored) {
-            endpoint = `${endpoint}?isSponsored=true`
+    async $getSpeechesData({ commit }, eventType) {
+        let endpoint = '/api/events/speeches/'
+        if (eventType === 'talks') {
+            endpoint = `${endpoint}?event_types=talk,sponsored`
+        } else if (eventType === 'tutorials') {
+            endpoint = `${endpoint}?event_types=tutorial`
         }
-        const talkData = await this.$http.$get(endpoint)
-        commit('setTalkDetailData', talkData)
+        const speechList = await this.$http.$get(endpoint)
+        commit('setSpeechesData', speechList)
     },
-    // async $getTutorialsData({ commit }) {
-    //     const tutorialList = await this.$http.$get('/api/events/tutorials/')
-    //     commit('setTutorialsData', tutorialList)
-    // },
+    async $getSpeechDetailData({ commit }, { eventType, eventId }) {
+        const endpoint = `/api/events/speeches/${eventType}/${eventId}/`
+        const SpeechDetail = await this.$http.$get(endpoint)
+        commit('setSpeechDetailData', SpeechDetail)
+    },
 }

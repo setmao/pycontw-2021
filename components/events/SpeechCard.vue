@@ -1,5 +1,5 @@
 <template>
-    <div v-show="shouldShow" class="speechCard">
+    <locale-link v-show="shouldShow" :to="to" class="speechCard">
         <div class="speechCard__speakerThumbnails">
             <div
                 v-for="(speaker, i) in speakers"
@@ -14,21 +14,26 @@
         </p>
         <div class="speechCard__title">{{ title }}</div>
         <div class="speechCard__category">{{ $t(`category.${category}`) }}</div>
-    </div>
+    </locale-link>
 </template>
 
 <script>
 import i18n from './SpeechCard.i18n'
+import { LocaleLink } from '~/components/core/links'
 
 export default {
     i18n,
     name: 'SpeechCard',
+    components: {
+        LocaleLink,
+    },
     props: {
         id: { type: Number, default: null },
         title: { type: String, default: '' },
         category: { type: String, default: '' },
         speakers: { type: Array, default: () => [] },
         shouldShow: { type: Boolean, default: true },
+        to: { type: String, default: '/' },
     },
 }
 </script>

@@ -1,65 +1,74 @@
 <template>
-    <i18n-page-wrapper class="px-8 sm:px-10 md:px-32 lg:px-60" custom-x>
-        <core-h1 :title="talkData.title" center></core-h1>
-        <div class="talk__speakers">
+    <i18n-page-wrapper
+        v-if="!!speechData"
+        class="px-8 sm:px-10 md:px-32 lg:px-60"
+        custom-x
+    >
+        <core-h1 :title="speechData.title" center></core-h1>
+        <div class="speech__speakers">
             <div
-                v-for="(speaker, index) in talkData.speakers"
-                :key="`talk_details_speaker_${index}`"
-                class="talk_speakerContainer"
+                v-for="(speaker, index) in speechData.speakers"
+                :key="`speech_details_speaker_${index}`"
+                class="speech_speakerContainer"
             >
-                <div class="talk__speakerThumbnail">
+                <div class="speech__speakerThumbnail">
                     <img :src="speaker.thumbnail_url" :alt="speaker.name" />
                 </div>
-                <p class="talk__speakerName">{{ speaker.name }}</p>
+                <p class="speech__speakerName">{{ speaker.name }}</p>
             </div>
         </div>
 
-        <div class="talk__infoSection">
-            <div class="talk__infos">
-                <div class="talk__info">
+        <div class="speech__infoSection">
+            <div class="speech__infos">
+                <div class="speech__info">
                     <img :src="icons.location" class="mx-2" />
-                    {{ locationMapping[talkData.location] }}
+                    {{ locationMapping[speechData.location] }}
                 </div>
-                <div class="talk__info">
+                <div class="speech__info">
                     <img :src="icons.language" class="mx-2" />
-                    {{ $t(`languages.${talkData.language}`) }}
+                    {{ $t(`languages.${speechData.language}`) }}
                 </div>
-                <div class="talk__info">
+                <div class="speech__info">
                     <img :src="icons.datetime" class="mx-2" />
-                    {{ $t(`terms.${getDateTag(talkData.begin_time)}`) }} •
-                    {{ getTime(talkData.begin_time) }}-{{
-                        getTime(talkData.end_time)
+                    {{ $t(`terms.${getDateTag(speechData.begin_time)}`) }} •
+                    {{ getTime(speechData.begin_time) }}-{{
+                        getTime(speechData.end_time)
                     }}
                 </div>
-                <div class="talk__info">
+                <div class="speech__info">
                     <img :src="icons.level" class="mx-2" />
-                    {{ $t(`levels.${talkData.python_level}`) }}
+                    {{ $t(`levels.${speechData.python_level}`) }}
                 </div>
-                <div class="talk__info">
+                <div class="speech__info">
                     <img :src="icons.category" class="mx-2" />
-                    {{ $t(`categories.${talkData.category}`) }}
+                    {{ $t(`categories.${speechData.category}`) }}
                 </div>
             </div>
         </div>
 
-        <tabs class="talk__tabs">
+        <tabs class="speech__tabs">
             <tab :title="$t('terms.speech')">
                 <span class="whitespace-pre-line">
-                    <p class="talk__tabParagraphTitle">
+                    <p class="speech__tabParagraphTitle">
                         {{ $t('terms.abstract') }}
                     </p>
-                    <p class="talk__tabParagraph">{{ talkData.abstract }}</p>
+                    <p class="speech__tabParagraph">
+                        {{ speechData.abstract }}
+                    </p>
                 </span>
                 <span class="whitespace-pre-line">
-                    <p class="talk__tabParagraphTitle">
+                    <p class="speech__tabParagraphTitle">
                         {{ $t('terms.description') }}
                     </p>
-                    <p class="talk__tabParagraph">
-                        {{ talkData.detailed_description }}
+                    <p class="speech__tabParagraph">
+                        {{ speechData.detailed_description }}
                     </p>
                 </span>
-                <div v-show="!!talkData.slide_link" class="talk__extLink mt-4">
-                    <ext-link :href="talkData.slide_link">
+                <div
+                    v-show="!!speechData.slide_link"
+                    class="speech__extLink mt-4"
+                >
+                    <ext-link :href="speechData.slide_link">
                         <fa
                             :icon="['fa', 'link']"
                             aria-hidden="true"
@@ -69,27 +78,27 @@
                     </ext-link>
                 </div>
                 <youtube
-                    v-show="!!talkData.youtube_id"
-                    :video-id="talkData.youtube_id"
+                    v-show="!!speechData.youtube_id"
+                    :video-id="speechData.youtube_id"
                     class="mt-4"
                 >
                 </youtube>
             </tab>
             <tab :title="$t('terms.bio')">
                 <div
-                    v-for="(speaker, index) in talkData.speakers"
-                    :key="`talk_details_tab_speaker_${index}`"
+                    v-for="(speaker, index) in speechData.speakers"
+                    :key="`speech_details_tab_speaker_${index}`"
                     class="mb-4 whitespace-pre-line"
                 >
                     <span class="whitespace-pre-line">
-                        <p class="talk__tabParagraphTitle">
+                        <p class="speech__tabParagraphTitle">
                             {{ speaker.name }}
                         </p>
-                        <p class="talk__tabParagraph">{{ speaker.bio }}</p>
+                        <p class="speech__tabParagraph">{{ speaker.bio }}</p>
                     </span>
 
                     <div class="flex">
-                        <div class="talk__extLink">
+                        <div class="speech__extLink">
                             <ext-link
                                 v-if="!!speaker.github_profile_url"
                                 :href="speaker.github_profile_url"
@@ -101,7 +110,7 @@
                                 ></fa>
                             </ext-link>
                         </div>
-                        <div class="talk__extLink">
+                        <div class="speech__extLink">
                             <ext-link
                                 v-if="!!speaker.twitter_profile_url"
                                 :href="speaker.twitter_profile_url"
@@ -113,7 +122,7 @@
                                 ></fa>
                             </ext-link>
                         </div>
-                        <div class="talk__extLink">
+                        <div class="speech__extLink">
                             <ext-link
                                 v-if="!!speaker.facebook_profile_url"
                                 :href="speaker.facebook_profile_url"
@@ -128,10 +137,10 @@
                     </div>
                 </div>
             </tab>
-            <tab v-if="!!talkData.slido_embed_link.length" title="Slido">
+            <tab v-if="!!speechData.slido_embed_link" title="Slido">
                 <iframe
-                    class="talk__slido"
-                    :src="talkData.slido_embed_link"
+                    class="speech__slido"
+                    :src="speechData.slido_embed_link"
                 ></iframe>
             </tab>
         </tabs>
@@ -158,14 +167,11 @@ export default {
         ExtLink,
         Youtube,
     },
-    async fetch() {
-        const talkId = this.$route.params.id
-        const isSponsored = this.$route.query.isSponsored
-        await this.$store.dispatch('$getTalkDetailData', talkId, isSponsored)
-    },
     data() {
         return {
-            talkData: {
+            eventId: 0,
+            eventType: '',
+            speechData: {
                 title: '',
                 slido_embed_link: '',
                 youtube_id: '',
@@ -187,12 +193,18 @@ export default {
             },
         }
     },
-    mounted() {
-        const talkData = this.$store.state.talkData
-        this.talkData = {
-            ...talkData,
-            begin_time: this.getDatetimeFromString(talkData.begin_time),
-            end_time: this.getDatetimeFromString(talkData.end_time),
+    async mounted() {
+        this.eventId = this.$route.params.id
+        this.eventType = this.$route.params.eventType
+        await this.$store.dispatch('$getSpeechDetailData', {
+            eventType: this.eventType,
+            eventId: this.eventId,
+        })
+        const speechData = this.$store.state.speechData
+        this.speechData = {
+            ...speechData,
+            begin_time: this.getDatetimeFromString(speechData.begin_time),
+            end_time: this.getDatetimeFromString(speechData.end_time),
         }
     },
     methods: {
@@ -223,25 +235,25 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-.talk__speakers {
+.speech__speakers {
     @apply flex justify-center mt-6 mb-16;
 }
-.talk_speakerContainer {
+.speech_speakerContainer {
     @apply flex flex-col;
 }
-.talk__speakerThumbnail {
+.speech__speakerThumbnail {
     @apply h-32 w-32 mx-12;
 }
-.talk__speakerThumbnail img {
+.speech__speakerThumbnail img {
     @apply object-cover rounded-full;
     height: 100%;
 }
-.talk__speakerName {
+.speech__speakerName {
     @apply font-serif text-center;
     color: #f3cc39;
 }
 
-.talk__infoSection {
+.speech__infoSection {
     @apply inline-block text-xs md:text-sm mb-28;
     @apply rounded-2xl min-w-full border-2 bg-opacity-0;
     line-height: 29px;
@@ -250,34 +262,34 @@ export default {
     box-shadow: 6px 6px 0 #c2a53a;
     padding: 30px;
 }
-.talk__infos {
+.speech__infos {
     @apply grid grid-cols-2 gap-y-10 gap-x-6;
 }
-.talk__info {
+.speech__info {
     @apply flex items-center font-serif mr-auto ml-12;
     color: #e6ba17;
 }
 
-.talk__tabs {
+.speech__tabs {
     @apply mb-8;
 }
-.talk__tabParagraphTitle {
+.speech__tabParagraphTitle {
     @apply font-serif font-bold mb-2;
     color: #e6ba17;
 }
-.talk__tabParagraph {
+.speech__tabParagraph {
     @apply font-serif mb-2;
 }
 
-.talk__extLink {
+.speech__extLink {
     @apply font-bold;
     color: #e6ba17;
 }
-.talk__extLink:hover {
+.speech__extLink:hover {
     color: #9387ff;
 }
 
-.talk__slido {
+.speech__slido {
     @apply w-full h-96;
 }
 </style>
